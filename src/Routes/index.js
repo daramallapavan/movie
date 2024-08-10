@@ -1,9 +1,11 @@
 
 import SearchPage from "../Pages/SearchPage";
+import Details from "../Pages/Details";
+import ExplorePage from "../Pages/ExplorePage"
+import { createBrowserRouter }  from "react-router-dom";
+import Home from "../Pages/Home"
+import App  from "../App";
 
-const { createBrowserRouter } = require("react-router-dom");
-const { default: Home } = require("../Pages/Home");
-const { default: App } = require("../App");
 
 const router =createBrowserRouter(
     [
@@ -14,6 +16,16 @@ const router =createBrowserRouter(
                 {
                     path: "",
                     element: <Home/>
+                },
+                {
+
+                    path: ":explore",
+                    element: <ExplorePage/>
+                },
+                {
+
+                    path:":explore/:id",
+                    element: <Details/>
                 },
         
                 {
