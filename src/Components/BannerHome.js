@@ -9,6 +9,7 @@ const BannerHome = () => {
   const imageUrl = useSelector(state => state.movieoData.imageUrl)
 
 
+
   const [currentImage,setCurrentImage]=useState(0)
   const hadleNext=()=>{
     if(currentImage<bannerData.length-1){
@@ -41,7 +42,7 @@ const BannerHome = () => {
         {
           bannerData.map((data, index) => {
             return (
-              <div className='min-w-full min-h-[450px] lg:min-h-full overflow-hidden relative group transition-all' style={{transform:`translate(-${currentImage*100}%)`}}>
+              <div key={data.id+"baneerHome"+index} className='min-w-full min-h-[450px] lg:min-h-full overflow-hidden relative group transition-all' style={{transform:`translate(-${currentImage*100}%)`}}>
                 <div className='w-full h-full '>
                   <img
                     src={imageUrl + data.backdrop_path}
@@ -65,8 +66,7 @@ const BannerHome = () => {
                     <h2 className='text-ellipsis line-clamp-3 my-2'>{data.overview}</h2>
                     <div className='flex items-center gap-2'>
                       <p>Rating : {Number(data.vote_average).toFixed(1)}+</p><span>|</span>
-                      <p >View :{Number(data.popularity).toFixed(0)}</p> <span>|</span>
-                      <p>Release Date : {data.release_date}</p>
+                      <p >View :{Number(data.popularity).toFixed(0)}</p> 
                     </div>
                     <button className='bg-white px-4 py-2 text-black font-bold rounded mt-4  hover:bg-gradient-to-l from-red-700 to-orange-500 shadow-md transition-all hover:scale-105' >
                       Play Now

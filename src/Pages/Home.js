@@ -1,27 +1,40 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import BannerHome from '../Components/BannerHome'
+import axios from 'axios'
+
+
 import { useSelector } from 'react-redux'
-import Card from '../Components/Card'
+import HorizontalSrcoll from '../Components/HorizontalSrcoll'
+import useFetch from '../hooks/useFetch'
 
 const Home = () => {
   const trendingData = useSelector(state => state.movieoData.bannerData)
+
+  const{data: nowPlayingData}=useFetch('/movie/now_playing')
+
+  const{data: topRatedMovies}=useFetch('/movie/top_rated')
+
+  const{data: popularMovies}=useFetch('/movie/popular')
+
+  const{data: onTheAir}=useFetch('/tv/on_the_air')
+
+  const {data: popularTvShows}=useFetch('/tv/popular')
+
+  
   return (
     <div>
-      <BannerHome/>
-      <div className='container mx-auto px-3 my-10'>
-        <h2 className='text-xl lg:text-2xl font-bold mb-2'>Trending Shows</h2>
-        <div className='grid grid-cols-[repeat(auto-fit,230px)] gap-6'>
-          {
-            trendingData.map((data)=>{
-              return (
-                <Card key={data.id} data={data}/>
-              )
-              
-             
-            })
-          }
-        </div>
-      </div>
+      <BannerHome />
+      <HorizontalSrcoll data={trendingData} heading="Trending Movies" trending={true}/>
+      <HorizontalSrcoll data={popularMovies} heading="Top Rated"/>
+      <HorizontalSrcoll data={nowPlayingData} heading="Now Playing"/>
+      <HorizontalSrcoll data={topRatedMovies} heading="Top Rated"/>
+      <HorizontalSrcoll data={onTheAir} heading="On The Air"/>
+      <HorizontalSrcoll data={popularMovies} heading="Popular Tv Shows"/>
+ 
+  
+   
+   
+    
     </div>
   )
 }
