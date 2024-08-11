@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {  Link, NavLink, useNavigate } from 'react-router-dom'
+import {  Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { IoSearchOutline } from "react-icons/io5";
 import { navigation } from '../constants/navigation';
 
@@ -8,7 +8,9 @@ import { navigation } from '../constants/navigation';
 
 
 const Header = () => {
-  const [searchInput,setSearchInput]=useState('')
+  const location=useLocation()
+  const query=location.search.slice(3).split('%20').join(" ")
+  const [searchInput,setSearchInput]=useState(query)
 
   const navigate=useNavigate()
 
@@ -26,7 +28,7 @@ const Header = () => {
 
   return (
 
-    <header  className='fixed top-0 w-full h-16 bg-neutral-500 bg-opacity-75 z-40' >
+    <header  className='fixed top-0 w-full h-16 bg-black bg-opacity-50 z-40 ' >
       <div className='container mx-auto px-4 flex items-center h-full'>
         <div className=' rounded overflow-hidden'>
         <Link to={"/"}>
@@ -54,7 +56,7 @@ const Header = () => {
         </nav>
 
         <div className='ml-auto flex items-center gap-5 '>
-          <form className='flex items-center gap-2 ' onSubmit={handleSubmit}>
+          <form className='lg:flex items-center gap-2 hidden' onSubmit={handleSubmit}>
             <input
              type='text'
               placeholder='Search here....' 

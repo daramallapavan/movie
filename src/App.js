@@ -51,8 +51,6 @@ fectchConfiguration()
   <div className='pt-18'>
   <Outlet/>
   </div>
-
-  <Footer/>
   <MobileNavigation/>
  </main>
 

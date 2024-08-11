@@ -14,26 +14,21 @@ const Home = () => {
 
   const{data: topRatedMovies}=useFetch('/movie/top_rated')
 
-  const{data: popularMovies}=useFetch('/movie/popular')
-
   const{data: onTheAir}=useFetch('/tv/on_the_air')
 
   const {data: popularTvShows}=useFetch('/tv/popular')
+
+
 
   
   return (
     <div>
       <BannerHome />
       <HorizontalSrcoll data={trendingData} heading="Trending Movies" trending={true}/>
-      <HorizontalSrcoll data={popularMovies} heading="Top Rated"/>
-      <HorizontalSrcoll data={nowPlayingData} heading="Now Playing"/>
-      <HorizontalSrcoll data={topRatedMovies} heading="Top Rated"/>
-      <HorizontalSrcoll data={onTheAir} heading="On The Air"/>
-      <HorizontalSrcoll data={popularMovies} heading="Popular Tv Shows"/>
- 
-  
-   
-   
+      <HorizontalSrcoll data={nowPlayingData} heading="Now Playing" mediaType={"movie"}/>
+      <HorizontalSrcoll data={topRatedMovies} heading="Top Rated" mediaType={"movie"}/>
+      <HorizontalSrcoll data={onTheAir} heading="On The Air" mediaType={"tv"}/>
+      <HorizontalSrcoll data={popularTvShows} heading="Popular Tv Shows" mediaType={"tv"}/>
     
     </div>
   )
