@@ -19,7 +19,7 @@ const HorizontalSrcoll = ({ data = [], heading ,trending,mediaType}) => {
 
     return (
         <div className='container mx-auto px-3 my-10'>
-            <h2 className='text-xl lg:text-2xl font-bold mb-3 text-white'>{heading}</h2>
+            <h2 className='text-xl lg:text-2xl font-bold mb-3 text-white capitalize'>{heading}</h2>
             <div className='relative'>
                 <div ref={contaimerRef} className='grid grid-cols-[repeat(auto-fit,230px)]  grid-flow-col gap-6 overflow-x-scroll relative overflow-hidden z-10 scroll-smooth transition-all scrolbar-none '> 
                     {

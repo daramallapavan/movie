@@ -53,16 +53,28 @@ const handleScrol = () => {
 
 
 useEffect(()=>{
-  setPage(1)
-  setData([])
-  fetchData()
+  if(query){
+    setPage(1)
+    setData([])
+    fetchData()
+  }
+
+  
+
 },[location?.search])
 
 
 
 
 useEffect(() => {
-  fetchData()
+
+  if(query){
+    fetchData()
+    
+  }
+    
+  
+
 },[page])
 
 useEffect(() => {
@@ -78,8 +90,10 @@ useEffect(() => {
       type='text'
       placeholder='search movies'
       onChange={(e)=>{
-        navigate(`/search?q=${e.target.value}}`)
+        navigate(`/search?q=${e.target.value}`)
       }}
+      value={query.split("%20").join(" ")}
+
       className='px-4 py-1 text-lg w-full bg-white rounded-full text-neutral-900'
       
       />

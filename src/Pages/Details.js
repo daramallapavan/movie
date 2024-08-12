@@ -5,6 +5,8 @@ import { useSelector } from 'react-redux'
 import moment from 'moment'
 import Divider from '../Components/Divider'
 import axios from 'axios'
+import useFetch from '../hooks/useFetch'
+import HorizontalSrcoll from '../Components/HorizontalSrcoll'
 
 const Details = () => {
 
@@ -16,13 +18,13 @@ const Details = () => {
 
   const { data: castData } = useFetchDetails(`/${params?.explore}/${params?.id}/credits`)
 
+  const { data: similarData } = useFetch(`/${params?.explore}/${params?.id}/similar`)
+
+  const { data: recommendationData } = useFetch(`/${params?.explore}/${params?.id}/recommendations`)
+
   const duration = (Number(data.runtime) / 60).toFixed(1).split('.')
 
-
-  console.log("Cast Data", castData.cast)
-
-
-  const writer=castData?.crew?.filter(el=>el.job === "Writer").map(el=>el.name).join(", ")
+  const writer = castData?.crew?.filter(el => el.job === "Writer").map(el => el.name).join(", ")
 
   return (
 
@@ -46,7 +48,7 @@ const Details = () => {
             }
             className='h-80 w-60 object-cover rounded'
           />
-         
+
         </div>
 
         <div >
@@ -88,19 +90,19 @@ const Details = () => {
 
           <div className='grid grid-cols-[repeat(auto-fit,96px)] gap-5 my-2'>
             {
-              castData?.cast?.filter(el=>el.profile_path).map((castFullData,index)=>{
+              castData?.cast?.filter(el => el.profile_path).map((castFullData, index) => {
                 return (
                   <div>
-                  
-                   <div>
-                   <img 
-                    src={imageUrl+castFullData?.profile_path}
-                    className='h-24 w-24 rounded-full object-cover'
-                    />
-                  </div>
 
-                  <p className='font-bold text-white'>{castFullData?.name}</p>
-                 
+                    <div>
+                      <img
+                        src={imageUrl + castFullData?.profile_path}
+                        className='h-24 w-24 rounded-full object-cover'
+                      />
+                    </div>
+
+                    <p className='font-bold text-white text-ellipsis line-clamp-2'>{castFullData?.name}</p>
+
                   </div>
                 )
               })
@@ -114,10 +116,15 @@ const Details = () => {
 
 
 
+
+
       </div>
 
 
-
+      <div>
+        <HorizontalSrcoll data={similarData} heading={"Similar "+params?.explore} mediaType={params?.explore}  />
+        <HorizontalSrcoll data={recommendationData} heading={"Recommendation "+params?.explore} mediaType={params?.explore}  />
+      </div>
 
 
     </div>
