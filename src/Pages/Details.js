@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import useFetchDetails from '../hooks/useFetchDetails'
-import { useParams } from 'react-router-dom'
+import { Await, useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import moment from 'moment'
 import Divider from '../Components/Divider'
+import axios from 'axios'
 
 const Details = () => {
 
@@ -13,9 +14,15 @@ const Details = () => {
 
   const { data } = useFetchDetails(`/${params.explore}/${params.id}`)
 
+  const { data: castData } = useFetchDetails(`/${params?.explore}/${params?.id}/credits`)
+
   const duration = (Number(data.runtime) / 60).toFixed(1).split('.')
 
 
+  console.log("Cast Data", castData.cast)
+
+
+  const writer=castData?.crew?.filter(el=>el.job === "Writer").map(el=>el.name).join(", ")
 
   return (
 
@@ -39,11 +46,11 @@ const Details = () => {
             }
             className='h-80 w-60 object-cover rounded'
           />
-
+         
         </div>
 
         <div >
-          <h2 className='text-2xl font-bold text-white '>{data.title || data.name}</h2>
+          <h2 className='text-2xl lg:text-3xl font-bold text-white '>{data.title || data.name}</h2>
           <p className='text-neutral-400'>{data.tagline}</p>
           <Divider />
           <div className='flex items-center gap-3 my-1'>
@@ -66,14 +73,50 @@ const Details = () => {
             <Divider />
 
           </div>
+
           <div>
-            <h2>Director: </h2>
+            <p><span className='text-white'>Director:</span> </p>
+            <Divider />
+            <p><span className='text-white'>Writer : </span> </p>
+            <Divider />
+
+
           </div>
+
+          <h2 className='text-white text-lg lg:text-xl'>Cast : </h2>
+
+
+          <div className='grid grid-cols-[repeat(auto-fit,96px)] gap-5 my-2'>
+            {
+              castData?.cast?.filter(el=>el.profile_path).map((castFullData,index)=>{
+                return (
+                  <div>
+                  
+                   <div>
+                   <img 
+                    src={imageUrl+castFullData?.profile_path}
+                    className='h-24 w-24 rounded-full object-cover'
+                    />
+                  </div>
+
+                  <p className='font-bold text-white'>{castFullData?.name}</p>
+                 
+                  </div>
+                )
+              })
+            }
+          </div>
+
+
+
+
         </div>
 
 
 
       </div>
+
+
 
 
 

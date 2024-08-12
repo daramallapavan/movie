@@ -18,7 +18,6 @@ const useFetchDetails=(endpoint)=>{
             setLoading(false)
             setData(response.data)
 
-            console.log("response",response.data)
 
         
         } catch (error) {
