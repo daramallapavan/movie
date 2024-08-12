@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
 import Card from '../Components/Card'
 
@@ -19,7 +19,7 @@ const navigate=useNavigate()
 
 const fetchData=async()=>{
   try {
-    const response=await axios.get('/search/collection',{
+    const response=await axios.get('/search/multi',{
       params:{
         query: query,
         page: page
@@ -27,9 +27,18 @@ const fetchData=async()=>{
       }
     })
 
+
     setSearchCount(response.data.total_results)
 
-    setData(response.data.results)
+   
+
+    setData((previous) => {
+      return [
+        ...previous,
+        ...response.data.results
+      ]
+
+    })
 
   } catch (error) {
     console.log("error",error)
