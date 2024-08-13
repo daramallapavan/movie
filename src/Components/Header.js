@@ -28,7 +28,7 @@ const Header = () => {
 
   return (
 
-    <header  className='fixed top-0 w-full h-16 bg-black bg-opacity-50 z-40 ' >
+    <header  className='fixed top-0 w-full h-16 bg-black bg-opacity-50 z-40 px-4 ' >
       <div className='container mx-auto px-4 flex items-center h-full'>
         <div className=' rounded overflow-hidden'>
         <Link to={"/"}>

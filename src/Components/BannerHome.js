@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { FaAngleLeft } from "react-icons/fa6";
 import { FaAngleRight } from "react-icons/fa6";
+import VideoPlay from './VideoPlay';
 
 const BannerHome = () => {
 
   const bannerData = useSelector(state => state.movieoData.bannerData)
   const imageUrl = useSelector(state => state.movieoData.imageUrl)
+
 
 
 
@@ -82,6 +84,8 @@ const BannerHome = () => {
             )
           })
         }
+
+
       </div>
     </section>
   )

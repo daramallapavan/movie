@@ -7,6 +7,7 @@ import Divider from '../Components/Divider'
 import axios from 'axios'
 import useFetch from '../hooks/useFetch'
 import HorizontalSrcoll from '../Components/HorizontalSrcoll'
+import VideoPlay from '../Components/VideoPlay'
 
 const Details = () => {
 
@@ -26,7 +27,18 @@ const Details = () => {
 
   const writer = castData?.crew?.filter(el => el.job === "Writer").map(el => el.name).join(", ")
 
-  return (
+  const [playVideo,setPlayVideo]=useState(false)
+
+  const [playVideoId,setPlayVideoId] =useState("")
+
+
+  const handlePlayVideo=(data)=>{
+    setPlayVideoId(data)
+    setPlayVideo(true)
+  }
+
+
+    return (
 
     <div>
 
@@ -49,15 +61,18 @@ const Details = () => {
             className='h-80 w-60 object-cover rounded'
           />
 
+          <button onClick={()=>handlePlayVideo(data)} className='mt-5 bg-white text-black rounded p-2 w-full font-bol text-lg hover:bg-gradient-to-l from-red-700 to-orange-500 hover:scale-105 transition-all'>
+            Play Now</button>
+
         </div>
 
         <div >
-          <h2 className='text-2xl lg:text-3xl font-bold text-white '>{data.title || data.name}</h2>
+          <h2 className='text-2xl lg:text-3xl font-bold text-white '>{data?.title || data?.name}</h2>
           <p className='text-neutral-400'>{data.tagline}</p>
           <Divider />
           <div className='flex items-center gap-3 my-1'>
-            <p>Rating:{Number(data.vote_average).toFixed(1)}+</p><span>|</span>
-            <p> View:{data.vote_count}</p><span>|</span>
+            <p>Rating:{Number(data?.vote_average).toFixed(1)}+</p><span>|</span>
+            <p> View:{data?.vote_count}</p><span>|</span>
             <p>Duration:{duration[0]}h{duration[1]}m</p>
 
           </div>
@@ -125,6 +140,12 @@ const Details = () => {
         <HorizontalSrcoll data={similarData} heading={"Similar "+params?.explore} mediaType={params?.explore}  />
         <HorizontalSrcoll data={recommendationData} heading={"Recommendation "+params?.explore} mediaType={params?.explore}  />
       </div>
+
+{
+  playVideo && (
+    <VideoPlay data={playVideoId} close={()=>setPlayVideo(false)} mediType={params?.explore} />
+  )
+}
 
 
     </div>

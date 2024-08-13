@@ -16,7 +16,7 @@ const useFetchDetails=(endpoint)=>{
             setLoading(true)
             const response=await axios.get(endpoint)
             setLoading(false)
-            setData(response.data)
+            setData(response?.data)
 
 
         
@@ -27,7 +27,6 @@ const useFetchDetails=(endpoint)=>{
 
 
    useEffect(()=>{
-
     getData()
    },[endpoint])
 
