@@ -27,6 +27,10 @@ const Details = () => {
 
   const writer = castData?.crew?.filter(el => el.job === "Writer").map(el => el.name).join(", ")
 
+
+  const director = castData?.crew?.filter(el => el.job === "Director").map(el => el.name).join(", ")
+
+
   const [playVideo,setPlayVideo]=useState(false)
 
   const [playVideoId,setPlayVideoId] =useState("")
@@ -80,21 +84,21 @@ const Details = () => {
           <div>
 
             <h2 className='text-white text-lg font-bold my-1'>Overview</h2>
-            <p>{data.overview}</p>
+            <p>{data?.overview}</p>
             <Divider />
             <div className='flex items-center gap-3 my-3 text-center'>
-              <p>Status : {data.status}</p><span>|</span>
-              <p> Release Date : {moment(data.release_date).format("MMM Do YY")}</p><span>|</span>
-              <p>Revenue : {data.revenue}</p>
+              <p>Status : {data?.status}</p><span>|</span>
+              <p> Release Date : {moment(data?.release_date).format("MMM Do YY")}</p><span>|</span>
+              <p>Revenue : {data?.revenue}</p>
             </div>
             <Divider />
 
           </div>
 
           <div>
-            <p><span className='text-white'>Director:</span> </p>
+            <p><span className='text-white'>Director: {director}</span> </p>
             <Divider />
-            <p><span className='text-white'>Writer : </span> </p>
+            <p><span className='text-white'>Writer : {writer}</span> </p>
             <Divider />
 
 
