@@ -27,6 +27,7 @@ const useFetchDetails=(endpoint)=>{
 
 
    useEffect(()=>{
+    window.scroll(0,0)
     getData()
    },[endpoint])
 
