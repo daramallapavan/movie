@@ -65,7 +65,7 @@ const Details = () => {
             className='h-80 w-60 object-cover rounded'
           />
 
-          <button onClick={()=>handlePlayVideo(data)} className='mt-5 bg-white text-black rounded p-2 w-full font-bol text-lg hover:bg-gradient-to-l from-red-700 to-orange-500 hover:scale-105 transition-all'>
+          <button onClick={()=>handlePlayVideo(data)} className='mt-5 bg-white text-black rounded p-2 w-full font-bold text-lg hover:bg-gradient-to-l from-red-700 to-orange-500 hover:scale-105 transition-all'>
             Play Now</button>
 
         </div>
